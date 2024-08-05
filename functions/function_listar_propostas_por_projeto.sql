@@ -1,4 +1,16 @@
+-- FUNCTION: public.listar_propostas_por_projeto(integer)
 
+-- DROP FUNCTION IF EXISTS public.listar_propostas_por_projeto(integer);
+
+CREATE OR REPLACE FUNCTION public.listar_propostas_por_projeto(
+	projeto_id integer)
+    RETURNS TABLE(propostaid integer, freelancernome character varying, freelancertelefone character varying, freelanceremail character varying, projetoid integer, valor character varying, datacriacao character varying, status character varying, observacao text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
 BEGIN
     -- Verifica se o projeto existe
     IF NOT EXISTS (SELECT 1 FROM Projeto WHERE idProjeto = projeto_id) THEN
@@ -27,3 +39,7 @@ BEGIN
         RETURN;
     END IF;
 END;
+$BODY$;
+
+ALTER FUNCTION public.listar_propostas_por_projeto(integer)
+    OWNER TO postgres;

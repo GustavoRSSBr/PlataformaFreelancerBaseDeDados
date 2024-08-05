@@ -1,4 +1,17 @@
+-- PROCEDURE: public.enviar_avaliacao(integer, integer, integer, character varying, integer, text, character varying)
 
+-- DROP PROCEDURE IF EXISTS public.enviar_avaliacao(integer, integer, integer, character varying, integer, text, character varying);
+
+CREATE OR REPLACE PROCEDURE public.enviar_avaliacao(
+	IN p_empresa_id integer,
+	IN p_freelancer_id integer,
+	IN p_projeto_id integer,
+	IN p_avaliado character varying,
+	IN p_nota integer,
+	IN p_comentario text,
+	IN p_data_avaliacao character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
 BEGIN
     -- Validar se o id do projeto existe
     IF NOT EXISTS (SELECT 1 FROM Projeto WHERE idProjeto = p_projeto_id) THEN
@@ -51,3 +64,6 @@ BEGIN
         UPDATE Projeto SET status = 'CONCLUIDO' WHERE idProjeto = p_projeto_id;
     END IF;
 END;
+$BODY$;
+ALTER PROCEDURE public.enviar_avaliacao(integer, integer, integer, character varying, integer, text, character varying)
+    OWNER TO postgres;

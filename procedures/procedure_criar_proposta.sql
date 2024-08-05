@@ -1,4 +1,16 @@
+-- PROCEDURE: public.criar_proposta(integer, integer, character varying, character varying, character varying, text)
 
+-- DROP PROCEDURE IF EXISTS public.criar_proposta(integer, integer, character varying, character varying, character varying, text);
+
+CREATE OR REPLACE PROCEDURE public.criar_proposta(
+	IN p_freelancerid integer,
+	IN p_projetoid integer,
+	IN p_valor character varying,
+	IN p_datacriacao character varying,
+	IN p_status character varying,
+	IN p_observacao text)
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     v_freelancer_exists BOOLEAN;
     v_projeto_exists BOOLEAN;
@@ -19,3 +31,6 @@ BEGIN
     INSERT INTO Proposta (freelancerId, projetoId, valor, dataCriacao, status, observacao)
     VALUES (p_freelancerId, p_projetoId, p_valor, p_dataCriacao, p_status, p_observacao);
 END;
+$BODY$;
+ALTER PROCEDURE public.criar_proposta(integer, integer, character varying, character varying, character varying, text)
+    OWNER TO postgres;

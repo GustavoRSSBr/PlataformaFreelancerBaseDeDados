@@ -1,4 +1,12 @@
+-- PROCEDURE: public.atualizastatusproposta(integer, character varying)
 
+-- DROP PROCEDURE IF EXISTS public.atualizastatusproposta(integer, character varying);
+
+CREATE OR REPLACE PROCEDURE public.atualizastatusproposta(
+	IN idproposta integer,
+	IN novostatus character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
 BEGIN
     -- Verificar se a proposta existe
     IF NOT EXISTS (SELECT 1 FROM Proposta WHERE propostaId = idProposta) THEN
@@ -42,3 +50,6 @@ BEGIN
         END IF;
     END IF;
 END;
+$BODY$;
+ALTER PROCEDURE public.atualizastatusproposta(integer, character varying)
+    OWNER TO postgres;

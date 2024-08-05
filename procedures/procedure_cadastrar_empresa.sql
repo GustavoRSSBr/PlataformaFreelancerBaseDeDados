@@ -1,4 +1,27 @@
+-- PROCEDURE: public.cadastrar_empresa(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
 
+-- DROP PROCEDURE IF EXISTS public.cadastrar_empresa(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying);
+
+CREATE OR REPLACE PROCEDURE public.cadastrar_empresa(
+	IN p_email character varying,
+	IN p_senha character varying,
+	IN p_tipousuario character varying,
+	IN p_cnpj character varying,
+	IN p_nome character varying,
+	IN p_telefone character varying,
+	IN p_logradouro character varying,
+	IN p_numero character varying,
+	IN p_complemento character varying,
+	IN p_bairro character varying,
+	IN p_cidade character varying,
+	IN p_cep character varying,
+	IN p_estado character varying,
+	IN p_pais character varying,
+	IN p_nomeempresa character varying,
+	IN p_ramoatuacao character varying,
+	IN p_site character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     v_usuarioId INT;
     v_enderecoId INT;
@@ -33,3 +56,6 @@ BEGIN
     
     RAISE NOTICE 'Empresa cadastrada com sucesso. ID: %', v_empresaId;
 END;
+$BODY$;
+ALTER PROCEDURE public.cadastrar_empresa(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying)
+    OWNER TO postgres;

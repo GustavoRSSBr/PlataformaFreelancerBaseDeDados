@@ -1,4 +1,16 @@
+-- FUNCTION: public.obter_detalhes_empresa(integer)
 
+-- DROP FUNCTION IF EXISTS public.obter_detalhes_empresa(integer);
+
+CREATE OR REPLACE FUNCTION public.obter_detalhes_empresa(
+	empresa_id integer)
+    RETURNS TABLE(id_empresa integer, email character varying, cnpj character varying, nome character varying, telefone character varying, logradouro character varying, numero character varying, complemento character varying, bairro character varying, cidade character varying, cep character varying, estado character varying, pais character varying, nome_empresa character varying, ramo_atuacao character varying, site character varying, nota_media numeric, avaliacoes json, projetos json) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
 BEGIN
     -- Verifica se a empresa existe
     IF NOT EXISTS (SELECT 1 FROM Empresa WHERE idEmpresa = empresa_id) THEN
@@ -61,3 +73,7 @@ BEGIN
     WHERE e.idEmpresa = empresa_id
     GROUP BY e.idEmpresa, u.email, en.logradouro, en.numero, en.complemento, en.bairro, en.cidade, en.cep, en.estado, en.pais;
 END;
+$BODY$;
+
+ALTER FUNCTION public.obter_detalhes_empresa(integer)
+    OWNER TO postgres;

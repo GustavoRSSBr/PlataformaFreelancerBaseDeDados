@@ -1,4 +1,11 @@
+-- PROCEDURE: public.excluir_projeto_se_nao_associado(integer)
 
+-- DROP PROCEDURE IF EXISTS public.excluir_projeto_se_nao_associado(integer);
+
+CREATE OR REPLACE PROCEDURE public.excluir_projeto_se_nao_associado(
+	IN in_idprojeto integer)
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     projeto_existe BOOLEAN;
     freelancer_associado BOOLEAN;
@@ -26,3 +33,6 @@ BEGIN
         RAISE NOTICE 'Projeto com id % excluído com sucesso.', in_idProjeto;
     END IF;
 END;
+$BODY$;
+ALTER PROCEDURE public.excluir_projeto_se_nao_associado(integer)
+    OWNER TO postgres;

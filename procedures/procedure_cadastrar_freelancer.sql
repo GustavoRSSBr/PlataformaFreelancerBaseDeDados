@@ -1,4 +1,30 @@
+-- PROCEDURE: public.cadastrar_freelancer(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying[])
 
+-- DROP PROCEDURE IF EXISTS public.cadastrar_freelancer(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying[]);
+
+CREATE OR REPLACE PROCEDURE public.cadastrar_freelancer(
+	IN p_email character varying,
+	IN p_senha character varying,
+	IN p_tipo_usuario character varying,
+	IN p_logradouro character varying,
+	IN p_numero character varying,
+	IN p_complemento character varying,
+	IN p_bairro character varying,
+	IN p_cidade character varying,
+	IN p_cep character varying,
+	IN p_estado character varying,
+	IN p_pais character varying,
+	IN p_nome character varying,
+	IN p_cpf character varying,
+	IN p_data_nascimento character varying,
+	IN p_telefone character varying,
+	IN p_descricao character varying,
+	IN p_disponibilidade character varying,
+	IN p_data_criacao character varying,
+	IN p_status character varying,
+	IN p_habilidades character varying[])
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     v_usuario_id INT;
     v_endereco_id INT;
@@ -39,3 +65,6 @@ BEGIN
         END LOOP;
     END IF;
 END;
+$BODY$;
+ALTER PROCEDURE public.cadastrar_freelancer(character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying[])
+    OWNER TO postgres;

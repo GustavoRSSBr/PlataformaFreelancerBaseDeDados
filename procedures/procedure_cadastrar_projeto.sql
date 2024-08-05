@@ -1,4 +1,18 @@
+-- PROCEDURE: public.cadastrarprojeto(character varying, text, character varying, character varying, character varying, character varying, integer, character varying[])
 
+-- DROP PROCEDURE IF EXISTS public.cadastrarprojeto(character varying, text, character varying, character varying, character varying, character varying, integer, character varying[]);
+
+CREATE OR REPLACE PROCEDURE public.cadastrarprojeto(
+	IN p_titulo character varying,
+	IN p_descricao text,
+	IN p_orcamento character varying,
+	IN p_prazo character varying,
+	IN p_status character varying,
+	IN p_datacriacao character varying,
+	IN p_empresaid integer,
+	IN p_habilidades character varying[])
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     v_projeto_id INT;
     habilidade VARCHAR;
@@ -24,3 +38,6 @@ BEGIN
         END LOOP;
     END IF;
 END;
+$BODY$;
+ALTER PROCEDURE public.cadastrarprojeto(character varying, text, character varying, character varying, character varying, character varying, integer, character varying[])
+    OWNER TO postgres;

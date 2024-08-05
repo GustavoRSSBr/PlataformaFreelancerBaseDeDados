@@ -1,4 +1,24 @@
+-- PROCEDURE: public.atualizar_freelancer(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, text, character varying, character varying, character varying[])
 
+-- DROP PROCEDURE IF EXISTS public.atualizar_freelancer(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, text, character varying, character varying, character varying[]);
+
+CREATE OR REPLACE PROCEDURE public.atualizar_freelancer(
+	IN in_idfreelancer integer,
+	IN in_telefone character varying,
+	IN in_logradouro character varying,
+	IN in_numero character varying,
+	IN in_complemento character varying,
+	IN in_bairro character varying,
+	IN in_cidade character varying,
+	IN in_cep character varying,
+	IN in_estado character varying,
+	IN in_pais character varying,
+	IN in_descricao text,
+	IN in_disponibilidade character varying,
+	IN in_status character varying,
+	IN in_habilidades character varying[])
+LANGUAGE 'plpgsql'
+AS $BODY$
 DECLARE
     endereco_id INT;
 BEGIN
@@ -41,3 +61,6 @@ BEGIN
 
     RAISE NOTICE 'ID de Freelancer % atualizado com sucesso.', in_idFreelancer;
 END;
+$BODY$;
+ALTER PROCEDURE public.atualizar_freelancer(integer, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, character varying, text, character varying, character varying, character varying[])
+    OWNER TO postgres;

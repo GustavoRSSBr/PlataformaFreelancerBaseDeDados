@@ -1,4 +1,16 @@
+-- FUNCTION: public.buscar_projetos_compatíveis(integer)
 
+-- DROP FUNCTION IF EXISTS public."buscar_projetos_compatíveis"(integer);
+
+CREATE OR REPLACE FUNCTION public."buscar_projetos_compatíveis"(
+	func_idfreelancer integer)
+    RETURNS TABLE(idprojeto integer, titulo character varying, descricao text, orcamento character varying, prazo character varying, status character varying, habilidades_compativeis text, habilidades_nao_compativeis text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
 DECLARE
     freelancer_exists BOOLEAN;
 BEGIN
@@ -38,3 +50,7 @@ BEGIN
         RETURN;
     END IF;
 END;
+$BODY$;
+
+ALTER FUNCTION public."buscar_projetos_compatíveis"(integer)
+    OWNER TO postgres;
